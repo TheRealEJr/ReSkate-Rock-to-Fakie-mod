@@ -1,3 +1,6 @@
+### AFTER INSTALLING OPEN RESKATE -> ADVANCED -> UNCHECK INSTALL RESKATE UPDATES -> AND RESTART YOUR RESKATE
+#### DO NOT HIT UPDATE IN THE BOTTOM RIGHT OR YOU WILL HAVE TO REINSTALL THE .bat AGAIN
+
 # ReSkate Rock to Fakie mod
 
 [![Version](https://img.shields.io/badge/version-v1.4.42-blue)](https://github.com/TheRealEJR/ReSkate-Rock-to-Fakie-mod)
