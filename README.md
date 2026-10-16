@@ -85,56 +85,6 @@ source_patch/payload/Extension/Skater/no_bail.h
 source_patch/payload/Extension/Trainer/trainer.cpp
 ```
 
-The helper accepts only the exact validated v1.4.41 source hashes or the already-patched v1.4.42 hashes. It refuses unfamiliar revisions.
-
-From PowerShell, after extracting/cloning this repository:
-
-```powershell
-$mod = (Get-Location).Path
-$repo = "$env:USERPROFILE\Desktop\ReSkate-Custom"
-py -3 "$mod\apply_to_reskate.py" "$repo" --dry-run
-# After DRY RUN PASSED:
-py -3 "$mod\apply_to_reskate.py" "$repo"
-```
-
-Then build (adjust the repo argument for your checkout):
-
-```bat
-build-release.bat "%USERPROFILE%\Desktop\ReSkate-Custom"
-```
-
-This builds CMake target `dingosdk_runtime` from `build\vs2026-x64\` and stages `payload\ReSkate.dll` inside **this mod repository**. The configured build tree and source compatibility are prerequisites; the release helper does not download or install Visual Studio, ReSkate, or the game.
-
-Create a Windows release ZIP after building and testing:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\package-release.ps1
-```
-
-The output `RockToFakie-v1.4.42-Windows-x64.zip` contains the actual compiled DLL, `install.bat`, `uninstall.bat`, `scripts/manage.ps1`, and this README. **Do not publish a pre-v1.4.42 DLL under this release name.**
-
-## Publish this as a new GitHub repository
-
-The intended repository is:
-
-**[TheRealEJR/ReSkate-Rock-to-Fakie-mod](https://github.com/TheRealEJR/ReSkate-Rock-to-Fakie-mod)**
-
-This URL is the intended destination, **not a confirmation that the repository already exists**. GitHub repository names cannot contain spaces, so the repo slug uses hyphens while its title is **ReSkate Rock to Fakie mod**.
-
-With [GitHub CLI](https://cli.github.com/) (`gh`) installed, sign in once using `gh auth login`, then run:
-
-```powershell
-.\publish-new-repo.ps1 -Visibility Public
-```
-
-To create a private repo instead:
-
-```powershell
-.\publish-new-repo.ps1 -Visibility Private
-```
-
-The script initializes `main`, commits the source and documentation, creates a **new** repository under `TheRealEJR`, and pushes the initial commit; it refuses to reuse an existing repository. See the publish script before running it. To publish a binary release later, upload the built/tested release ZIP under the repository's *Releases* section.
-
 ## Known limitations
 
 - The game may add a `BS` or `FS` prefix separately from the translated trick name.
