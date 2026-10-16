@@ -1,0 +1,9 @@
+# Compile your own binary; distribute via GitHub Releases, not Git source.
+/payload/*.dll
+/*.zip
+/last-install-path.txt
+__pycache__/
+*.pyc
+/.vs/
+/build/
+/dist/

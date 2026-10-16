@@ -1,0 +1,18 @@
+{
+  "release": "v1.4.42",
+  "base": "v1.4.41",
+  "files": {
+    "Extension/Skater/no_bail.cpp": {
+      "before": "ad7a8fe5598d6965d45773439ae5462003c4457384b576b4eeefe53b824cbca5",
+      "after": "e4dabad1923160094b017f3c4aa0ed476c26f90755cd1b69221aa59172f11ccd"
+    },
+    "Extension/Skater/no_bail.h": {
+      "before": "d00873ecaa90417b59fded665da16f347f301ba777ffc41e1d55f2cf0caeaa52",
+      "after": "c2099fccc4c2b4153dc9f277de4dfa3320abc2a5253f99e73d41ef741bd46253"
+    },
+    "Extension/Trainer/trainer.cpp": {
+      "before": "58ac0dd2bc7bb528393961c4256cae54102fe19e5b3bcf0bcfe7f05f0c1a3a7b",
+      "after": "03220f6e722bee2e01ed0b6cfe74d237cc9f396f64a383a1fedfdd152cbc78c6"
+    }
+  }
+}
