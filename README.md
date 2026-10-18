@@ -1,4 +1,4 @@
-# IMPORTANT
+# IMPORTANT (TLDR)
    ```text
    rocktofakie on
    rocktofakie status
@@ -6,8 +6,9 @@
 ### AFTER INSTALLING OPEN RESKATE -> ADVANCED -> UNCHECK INSTALL RESKATE UPDATES -> AND RESTART YOUR RESKATE
 #### DO NOT HIT UPDATE IN THE BOTTOM RIGHT OR YOU WILL HAVE TO REINSTALL THE .bat AGAIN
 
+# The boring parts
 
-# ReSkate Rock to Fakie mod
+## ReSkate Rock to Fakie mod
 
 [![Version](https://img.shields.io/badge/version-v2.0.0-blue)](https://github.com/TheRealEJR/ReSkate-Rock-to-Fakie-mod)
 [![ReSkate](https://img.shields.io/badge/ReSkate-2.1.0-orange)](https://github.com/Dingo-Shenanigans/ReSkate)
