@@ -1,4 +1,4 @@
-# Rock to Fakie installer — release v1.4.42. Requires Windows PowerShell 5.1+.
+# Rock to Fakie installer - release v2.0.0 (ReSkate 2.1.0). Requires Windows PowerShell 5.1+.
 # Only manages ReSkate.dll beside Skate.exe. All backup and manifest files
 # live under the game directory; the original DLL is never changed in place.
 [CmdletBinding()]
@@ -71,7 +71,7 @@ try {
     if ($Action -eq 'Install') {
         $source = Join-Path $releaseRoot 'payload\ReSkate.dll'
         if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
-            throw 'payload\ReSkate.dll is missing. Build the v1.4.42 DLL or download a compiled release. No changes made.'
+            throw 'payload\ReSkate.dll is missing. Build the v2.0.0 DLL (ReSkate 2.1.0 + Rock to Fakie) or download a compiled release. No changes made.'
         }
         $bytes = [System.IO.File]::ReadAllBytes($source)
         if ($bytes.Length -lt 1048576 -or $bytes[0] -ne 0x4D -or $bytes[1] -ne 0x5A) {
@@ -89,7 +89,30 @@ try {
                 Write-Host 'Already installed. Existing original backup is preserved.'
                 exit 0
             }
-            throw "An installation or backup already exists at $backupDir. Uninstall the prior version before installing another."
+            # Upgrade: an earlier Rock to Fakie build is still installed, unchanged since this
+            # installer put it there. Replace it and keep the ORIGINAL backup and its hash.
+            if ((Test-Path -LiteralPath $target -PathType Leaf) -and
+                (Get-Sha $target) -eq [string]$saved.InstalledSha256) {
+                $staging = "$target.r2f-staging"
+                Ensure-NotLink $staging
+                Copy-Item -LiteralPath $source -Destination $staging -Force -ErrorAction Stop
+                if ((Get-Sha $staging) -ne $newHash) {
+                    Remove-Item -LiteralPath $staging -Force -ErrorAction SilentlyContinue
+                    throw 'The new DLL failed SHA-256 verification while staging. Nothing was changed.'
+                }
+                Move-Item -LiteralPath $staging -Destination $target -Force -ErrorAction Stop
+                if ((Get-Sha $target) -ne $newHash) {
+                    throw "Upgraded DLL failed SHA-256 verification. Your original backup is still in $backupDir."
+                }
+                $previousVersion = [string]$saved.Version
+                $saved.InstalledSha256 = $newHash
+                $saved.Version = 'v2.0.0'
+                $saved | ConvertTo-Json | Set-Content -LiteralPath $manifestFile -Encoding UTF8
+                Write-Host "Upgraded Rock to Fakie $previousVersion -> v2.0.0. Original backup preserved: $backupDir"
+                Write-Host 'Launch Skate, open the ReSkate console, and enter: rocktofakie on'
+                exit 0
+            }
+            throw "An installation or backup already exists at $backupDir. The installed ReSkate.dll was changed after the last install (for example by a ReSkate update). Run uninstall.bat first, or move that folder aside."
         }
         $existed = Test-Path -LiteralPath $target -PathType Leaf
         $originalHash = $null
@@ -109,7 +132,7 @@ try {
             }
             $record = [ordered]@{
                 Schema = 1
-                Version = 'v1.4.42'
+                Version = 'v2.0.0'
                 OriginalExisted = [bool]$existed
                 OriginalSha256 = $originalHash
                 InstalledSha256 = $newHash
@@ -120,12 +143,12 @@ try {
             if ((Get-Sha $target) -ne $newHash) {
                 throw 'Installed DLL failed SHA-256 verification.'
             }
-            Write-Host 'Installed v1.4.42 ReSkate.dll successfully.'
+            Write-Host 'Installed Rock to Fakie v2.0.0 ReSkate.dll successfully.'
             Write-Host "Original backup (do not delete): $backupDir"
             try { Set-Content -LiteralPath $lastPath -Value $folder -Encoding UTF8 } catch {
                 Write-Warning 'Could not remember game folder. You can pass -GameDir to uninstall.bat.'
             }
-            Write-Host 'Launch Skate, open the ReSkate console, and enter: trainer rock trick hud'
+            Write-Host 'Launch Skate, open the ReSkate console, and enter: rocktofakie on'
         } catch {
             $reason = $_
             Write-Warning "Installation failed: $reason. Attempting automatic rollback."

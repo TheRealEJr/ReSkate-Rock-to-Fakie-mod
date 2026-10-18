@@ -1,0 +1,2 @@
+# The source patch is checked by SHA-256: keep its files byte for byte as committed.
+source_patch/** -text
