@@ -1,5 +1,11 @@
+# IMPORTANT
+   ```text
+   rocktofakie on
+   rocktofakie status
+   ```
 ### AFTER INSTALLING OPEN RESKATE -> ADVANCED -> UNCHECK INSTALL RESKATE UPDATES -> AND RESTART YOUR RESKATE
 #### DO NOT HIT UPDATE IN THE BOTTOM RIGHT OR YOU WILL HAVE TO REINSTALL THE .bat AGAIN
+
 
 # ReSkate Rock to Fakie mod
 
