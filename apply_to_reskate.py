@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Apply the Rock to Fakie source patch to a ReSkate v2.1.0 checkout.
+"""Apply the Rock to Fakie source patch to a ReSkate v2.1.1 checkout.
 
 Every file is checked against source_patch/manifest.json before anything is written:
-a changed file must match ReSkate v2.1.0 exactly, and a new file must not exist yet
+a changed file must match ReSkate v2.1.1 exactly, and a new file must not exist yet
 (or already be the Rock to Fakie version). Line endings (LF or CRLF) do not matter.
 Originals are backed up under .git/rock-to-fakie-source-backups/ before they are replaced.
 """
@@ -46,8 +46,8 @@ def update(repo: Path, dry_run: bool):
                 print('ALREADY', rel)
                 continue
             if checksums['before'] is None or current != checksums['before']:
-                raise ValueError(f'{rel} is not the ReSkate v2.1.0 version ({current}). Nothing changed. '
-                                 'Start from a clean ReSkate v2.1.0 checkout.')
+                raise ValueError(f'{rel} is not the ReSkate v2.1.1 version ({current}). Nothing changed. '
+                                 'Start from a clean ReSkate v2.1.1 checkout.')
             print('UPDATE ', rel)
         else:
             if checksums['before'] is not None:

@@ -1,4 +1,4 @@
-# Rock to Fakie installer - release v2.0.0 (ReSkate 2.1.0). Requires Windows PowerShell 5.1+.
+# Rock to Fakie installer - release v2.0.1 (ReSkate 2.1.1). Requires Windows PowerShell 5.1+.
 # Only manages ReSkate.dll beside Skate.exe. All backup and manifest files
 # live under the game directory; the original DLL is never changed in place.
 [CmdletBinding()]
@@ -71,7 +71,7 @@ try {
     if ($Action -eq 'Install') {
         $source = Join-Path $releaseRoot 'payload\ReSkate.dll'
         if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
-            throw 'payload\ReSkate.dll is missing. Build the v2.0.0 DLL (ReSkate 2.1.0 + Rock to Fakie) or download a compiled release. No changes made.'
+            throw 'payload\ReSkate.dll is missing. Build the v2.0.1 DLL (ReSkate 2.1.1 + Rock to Fakie) or download a compiled release. No changes made.'
         }
         $bytes = [System.IO.File]::ReadAllBytes($source)
         if ($bytes.Length -lt 1048576 -or $bytes[0] -ne 0x4D -or $bytes[1] -ne 0x5A) {
@@ -106,9 +106,9 @@ try {
                 }
                 $previousVersion = [string]$saved.Version
                 $saved.InstalledSha256 = $newHash
-                $saved.Version = 'v2.0.0'
+                $saved.Version = 'v2.0.1'
                 $saved | ConvertTo-Json | Set-Content -LiteralPath $manifestFile -Encoding UTF8
-                Write-Host "Upgraded Rock to Fakie $previousVersion -> v2.0.0. Original backup preserved: $backupDir"
+                Write-Host "Upgraded Rock to Fakie $previousVersion -> v2.0.1. Original backup preserved: $backupDir"
                 Write-Host 'Launch Skate, open the ReSkate console, and enter: rocktofakie on'
                 exit 0
             }
@@ -132,7 +132,7 @@ try {
             }
             $record = [ordered]@{
                 Schema = 1
-                Version = 'v2.0.0'
+                Version = 'v2.0.1'
                 OriginalExisted = [bool]$existed
                 OriginalSha256 = $originalHash
                 InstalledSha256 = $newHash
@@ -143,7 +143,7 @@ try {
             if ((Get-Sha $target) -ne $newHash) {
                 throw 'Installed DLL failed SHA-256 verification.'
             }
-            Write-Host 'Installed Rock to Fakie v2.0.0 ReSkate.dll successfully.'
+            Write-Host 'Installed Rock to Fakie v2.0.1 ReSkate.dll successfully.'
             Write-Host "Original backup (do not delete): $backupDir"
             try { Set-Content -LiteralPath $lastPath -Value $folder -Encoding UTF8 } catch {
                 Write-Warning 'Could not remember game folder. You can pass -GameDir to uninstall.bat.'
