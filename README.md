@@ -40,9 +40,7 @@ Adds **Rock to Fakie** to the game's **original bottom-left trick ticker** durin
 4. After the game launches, open the ReSkate console and enter:
 
    ```text
-   trainer rock auto off
-   trainer rock trick hud
-   trainer rock trick status
+   rocktofakie on
    ```
 
 5. Perform a Board Stall / Lip Stall and press **physical Xbox B** to exit. Qualifying tricks will show **Rock to Fakie** in the original ticker. This remains enabled until disabled or the game is closed.
@@ -50,10 +48,10 @@ Adds **Rock to Fakie** to the game's **original bottom-left trick ticker** durin
 To turn it off without uninstalling:
 
 ```text
-trainer rock trick off
+rocktofakie off
 ```
 
-**Note:** `trainer rock native 1` is no longer needed to activate the HUD. Telemetry capture still has its own time limit, but it does not turn off the v1.4.42 HUD mode. The HUD toggle resets to OFF when you restart Skate; re-enter `trainer rock trick hud` each session.
+**Note:** `trainer rock trick hud` is no longer needed to activate the HUD. Telemetry capture still has its own time limit, but it does not turn off the v1.4.42 HUD mode. The HUD toggle resets to OFF when you restart Skate; re-enter `rocktofakie on` each session.
 
 ## Safe backup and uninstall
 
